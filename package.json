@@ -1,17 +1,8 @@
 {
-  "name": "web_development_immersive_project_2",
+  "name": "wdi_project_2",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/OwlMan77"
-  },
-  "author": "JM McGhee",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
@@ -34,5 +25,19 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.0.0"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OwlMan77/WDI-PROJECT-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OwlMan77/WDI-PROJECT-2/issues"
+  },
+  "homepage": "https://github.com/OwlMan77/WDI-PROJECT-2#readme"
 }
