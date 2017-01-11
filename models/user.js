@@ -6,8 +6,8 @@ const userSchema = new mongoose.Schema({
   username: {type: String, unique: true, trim: true, required: true},
   email: {type: String, unique: true, trim: true, required: true},
   passwordHash: {type: String, required: true},
-  homePostcode: {type: String, trim}
-}
+  homePostcode: {type: String, trim: true}
+});
 
 userSchema
   .virtual('password')
@@ -18,22 +18,22 @@ userSchema
   .set(setPasswordConfirmation);
 
 userSchema
-  .path('passwordHash');
+  .path('passwordHash')
   .validate(validatePasswordHash);
 
 userSchema
   .path('email')
-  .validate(validateEmail)
+  .validate(validateEmail);
 
 userSchema.method.validatePasswordHash = validatePassword;
 
 userSchema.set('toJSON', {
   transform: function(doc, ret) {
-  delete ret.passwordHash;
-  delete ret.email;
-  delete ret.__v;
-  return ret;
-}
+    delete ret.passwordHash;
+    delete ret.email;
+    delete ret.__v;
+    return ret;
+  }
 });
 
 function setPassword(value){
