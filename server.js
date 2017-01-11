@@ -7,6 +7,8 @@ const expressJWT       = require('express-jwt');
 
 const app              = express();
 const config           = require('./config/config.js');
+const webRouter        = require('./config/webRoutes.js');
+const apiRouter        = require('./config/aRoutes.js');
 
 mongoose.connect(config.db);
 
@@ -15,5 +17,18 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded( {extended: true}));
 app.use(cors);
 app.use(express.static(`${__dirname}/public`));
+
+app.use(expressJWT({secret: config.secret}))
+  .unless(
+  {
+    path: [
+      { url: '/api/register', methods: ['POST'] },
+      { url: '/api/login',    methods: ['POST'] }
+    ]
+  }
+);
+
+app.use('/', webRouter);
+app.use('/api', apiRouter);
 
 app.listen(config.port, console.log(`Express is running on: ${config.port}`));
