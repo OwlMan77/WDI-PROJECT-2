@@ -27,6 +27,12 @@ app.use(expressJWT({secret: config.secret}))
     ]
   }
 );
+app.use(jwtErrorHandler);
+
+function jwtErrorHandler(err, req, res, next){
+  if (err.name !== 'UnauthorizedError') return next();
+  return res.status(401).json({message: 'Unauthorized request'});
+}
 
 app.use('/', webRouter);
 app.use('/api', apiRouter);
