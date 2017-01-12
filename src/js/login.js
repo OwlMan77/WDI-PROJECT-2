@@ -18,6 +18,7 @@ Login.init = function(){
 Login.loggedInState = function(){
   $('.loggedIn').show();
   $('.loggedOut').hide();
+  this.$main.html(``);
 };
 
 Login.loggedOutState = function(){
@@ -67,6 +68,7 @@ Login.login = function(e){
 Login.logout = function(e){
   e.preventDefault();
   this.loggedOutState();
+  this.removeToken();
 };
 
 Login.handleForm = function(e){
