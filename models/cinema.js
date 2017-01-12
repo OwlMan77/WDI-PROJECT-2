@@ -2,9 +2,10 @@ const mongoose  = require('mongoose');
 
 const cinemaSchema = new mongoose.Schema({
   id: {type: String},
-  name: {type: String},
-  location: {type: String},
-  lisitngs: {type: Object}
+  address: {type: String},
+  lat: {type: String},
+  lng: {type: String},
+  listings: {type: Array}
 });
 
 module.exports = mongoose.model('Cinema', cinemaSchema);

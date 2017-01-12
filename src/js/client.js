@@ -1,1 +1,1 @@
-console.log('runnign');
+console.log('running');
