@@ -18,7 +18,6 @@ Login.init = function(){
 Login.loggedInState = function(){
   $('.loggedIn').show();
   $('.loggedOut').hide();
-  this.$main.html(``);
 };
 
 Login.loggedOutState = function(){
@@ -28,41 +27,14 @@ Login.loggedOutState = function(){
 
 Login.register = function(e) {
   if (e) e.preventDefault();
-  this.$main.html(`
-      <form method="post" action="/register">
-        <div class="form-group">
-          <input class="form-control" type="text" name="user[username]" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="email" name="user[email]" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="password" name="user[password]" placeholder="Password">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="user[homePostcode]" placeholder="Home postcode">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Register">
-      </form>
-    `);
+  console.log('register');
 };
 
+
+
 Login.login = function(e){
-  e.preventDefault();
-  this.$main.html(`
-  <form method="post" action="/login">
-  <div class="form-group">
-    <input class="form-control" type="email" name="email" placeholder="Email">
-  </div>
-  <div class="form-group">
-    <input class="form-control" type="password" name="password" placeholder="Password">
-  </div>
-  <input class="btn btn-primary" type="submit" value="Login">
-</form>
-    `);
+  if (e) e.preventDefault();
+  console.log('login');
 };
 
 Login.logout = function(e){
@@ -111,6 +83,11 @@ Login.getToken = function(){
 
 Login.removeToken = function(){
   return window.localStorage.clear();
+};
+
+Login.clearModal = function (){
+  $('#registerModal').modal('hide');
+  $('#loginModal').modal('hide');
 };
 
 $(Login.init.bind(Login));
