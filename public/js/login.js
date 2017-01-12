@@ -1,1 +1,1 @@
-"use strict";var Login=Login||{};Login.init=function(){};
+"use strict";var Login=Login||{};Login.init=function(){},$(Login.init.bind(Login));
