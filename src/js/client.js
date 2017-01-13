@@ -13,4 +13,8 @@ googleMap.mapSetup = function() {
   this.map = new google.maps.Map(canvas, mapOptions);
 };
 
+googleMap.getCinemas = function() {
+  $.get('http://localhost:3000/cameras').done(this.loopThroughCinemas);
+};
+
 $(googleMap.mapSetup.bind(googleMap));
