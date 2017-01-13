@@ -1,1 +1,2 @@
-console.log('running');
+const googleMaps = {} || googleMaps;
+const google = google;
