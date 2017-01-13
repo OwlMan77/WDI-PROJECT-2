@@ -10,7 +10,8 @@ const config           = require('./config/config');
 const webRouter        = require('./config/webRoutes');
 const apiRouter        = require('./config/apiRoutes');
 
-mongoose.connect(config.db);
+const databaseURL = process.env.MONGOLAB_URL || config.db;
+mongoose.connect(databaseURL);
 
 app.use(morgan('dev'));
 app.use(express.static(`${__dirname}/public`));

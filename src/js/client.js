@@ -1,6 +1,7 @@
 const googleMap = {} || googleMap;
 const google = google;
 
+
 googleMap.mapSetup = function() {
   const canvas = document.getElementById('map-canvas');
 
@@ -22,6 +23,18 @@ googleMap.loopThroughCinemas = function(data) {
   $.each(data.cinemas, (index, cinema) => {
     googleMap.createMarkerForCinemas(cinema);
   });
+};
+
+googleMap.createMarkerForCinemas = function(cinema) {
+  const latlng = new google.maps.LatLng(cinema.lat, cinema.lng);
+  const marker = new google.maps.Marker({
+    position: latlng,
+    map: this.map,
+    icon: '/images/marker.png',
+    animation: google.maps.Animation.DROP
+  });
+
+  // this.addInfoWindowForCamera(cinema, marker);
 };
 
 $(googleMap.mapSetup.bind(googleMap));

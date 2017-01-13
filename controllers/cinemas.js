@@ -1,12 +1,12 @@
 const Cinema = require('../models/cinema');
 
-function camerasIndex(req, res){
+function cinemasIndex(req, res){
   Cinema.find((err, cinemas) => {
     if (err) return res.status(500).send();
-    return res.status(200).json({cinemas});
+    return res.status(200).json({cinemas: cinemas});
   });
 }
 
 module.exports = {
-  index: camerasIndex
+  index: cinemasIndex
 };
