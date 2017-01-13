@@ -14,7 +14,7 @@ googleMap.mapSetup = function() {
 };
 
 googleMap.getCinemas = function() {
-  $.get('http://localhost:3000/cameras').done(this.loopThroughCinemas);
+  $.get('http://localhost:3000/cinemas').done(this.loopThroughCinemas);
 };
 
 $(googleMap.mapSetup.bind(googleMap));
