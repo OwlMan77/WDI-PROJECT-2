@@ -41,7 +41,7 @@ googleMap.addInfoWindowForCamera = function(cinema, marker){
   google.maps.event.addListener(marker, 'click', () => {
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
-      content: `<h1>${cinema.address}</h1>`
+      content: `<h3>${cinema.address}</h3> <p></p>`
     });
     this.infoWindow.open(this.map, marker);
   });
