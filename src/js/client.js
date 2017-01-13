@@ -21,21 +21,19 @@ googleMap.getCinemas = function() {
 
 googleMap.loopThroughCinemas = function(data) {
   $.each(data.cinemas, (index, cinema) => {
-    console.log(cinema.lat);
     googleMap.createMarkerForCinemas(cinema);
   });
 };
 
 googleMap.createMarkerForCinemas = function(cinema) {
-  console.log(cinema.address);
-  const latlng = new google.maps.LatLng(cinema.lat, cinema.lng);
+  console.log(cinema.lat, cinema.lng);
+  const latLng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
-    position: latlng,
+    position: latLng,
     map: this.map,
     // icon: '/images/marker.png',
     animation: google.maps.Animation.DROP
   });
-
   this.addInfoWindowForCamera(cinema, marker);
 };
 
