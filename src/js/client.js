@@ -21,20 +21,31 @@ googleMap.getCinemas = function() {
 
 googleMap.loopThroughCinemas = function(data) {
   $.each(data.cinemas, (index, cinema) => {
+    console.log(cinema.lat);
     googleMap.createMarkerForCinemas(cinema);
   });
 };
 
 googleMap.createMarkerForCinemas = function(cinema) {
+  console.log(cinema.address);
   const latlng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
     position: latlng,
     map: this.map,
-    icon: '/images/marker.png',
+    // icon: '/images/marker.png',
     animation: google.maps.Animation.DROP
   });
 
-  // this.addInfoWindowForCamera(cinema, marker);
+  this.addInfoWindowForCamera(cinema, marker);
 };
 
+googleMap.addInfoWindowForCamera = function(cinema, marker){
+  google.maps.event.addListener(marker, 'click', () => {
+    if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
+    this.infoWindow = new google.maps.InfoWindow({
+      content: `<h1>${cinema.address}</h1>`
+    });
+    this.infoWindow.open(this.map, marker);
+  });
+};
 $(googleMap.mapSetup.bind(googleMap));
