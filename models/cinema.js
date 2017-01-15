@@ -5,7 +5,10 @@ const cinemaSchema = new mongoose.Schema({
   address: {type: String},
   lat: {type: String},
   lng: {type: String},
-  listings: {type: Array}
+  listings: {type: Array,
+    listing: {
+      type: Object
+    }}
 });
 
 module.exports = mongoose.model('Cinema', cinemaSchema);

@@ -26,6 +26,11 @@ googleMap.loopThroughCinemas = function(data) {
 };
 
 googleMap.createMarkerForCinemas = function(cinema) {
+  //for each cinema.listing print title
+  $.each(cinema.listings, (index) => {
+    console.log(cinema.listings[index].title);
+    console.log(cinema.listings[index].times);
+  });
   console.log(cinema.lat, cinema.lng);
   const latLng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
@@ -41,9 +46,10 @@ googleMap.addInfoWindowForCamera = function(cinema, marker){
   google.maps.event.addListener(marker, 'click', () => {
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
-      content: `<h3>${cinema.address}</h3> <p></p>`
+      content: `<h3>${cinema.address}</h3> `
     });
     this.infoWindow.open(this.map, marker);
   });
 };
+
 $(googleMap.mapSetup.bind(googleMap));
