@@ -43,7 +43,7 @@ googleMap.addInfoWindowForCamera = function(cinema, marker){
   google.maps.event.addListener(marker, 'click', () => {
     let info = '';
     $.each(cinema.listings, (index) => {
-      const timeInfo = JSON.stringify(cinema.listings[index].times);
+      const timeInfo = cinema.listings[index].times.join(', ' );
       info = info +`<li class = ${titleCssClass}>${cinema.listings[index].title}:</li><li class = ${timesCssClass}>${timeInfo}</li>`;
       console.log(cinema.listings[index].times);
     });
