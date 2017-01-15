@@ -1,6 +1,7 @@
 const googleMap = {} || googleMap;
 const google = google;
-
+const titleCssClass = 'titles';
+const timesCssClass = 'times';
 
 googleMap.mapSetup = function() {
   const canvas = document.getElementById('map-canvas');
@@ -27,10 +28,6 @@ googleMap.loopThroughCinemas = function(data) {
 
 googleMap.createMarkerForCinemas = function(cinema) {
   //for each cinema.listing print title
-  $.each(cinema.listings, (index) => {
-    console.log(cinema.listings[index].title);
-    console.log(cinema.listings[index].times);
-  });
   console.log(cinema.lat, cinema.lng);
   const latLng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
@@ -44,9 +41,15 @@ googleMap.createMarkerForCinemas = function(cinema) {
 
 googleMap.addInfoWindowForCamera = function(cinema, marker){
   google.maps.event.addListener(marker, 'click', () => {
+    let info = '';
+    $.each(cinema.listings, (index) => {
+      const timeInfo = JSON.stringify(cinema.listings[index].times);
+      info = info +`<li class = ${titleCssClass}>${cinema.listings[index].title}:</li><li class = ${timesCssClass}>${timeInfo}</li>`;
+      console.log(cinema.listings[index].times);
+    });
     if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
     this.infoWindow = new google.maps.InfoWindow({
-      content: `<h3>${cinema.address}</h3> `
+      content: `<h3>${cinema.address}</h3> <ul>${info}</ul>`
     });
     this.infoWindow.open(this.map, marker);
   });
