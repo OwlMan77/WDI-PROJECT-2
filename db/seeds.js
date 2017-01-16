@@ -3,8 +3,9 @@ const rp               = require('request-promise');
 const databaseURL      = 'mongodb://localhost:27017/cinemas';
 mongoose.connect(databaseURL);
 const Cinema           = require('../models/cinema');
+const Promise          = require('bluebird');
 
-rp.Promises = global.Promises;
+Promise.promisifyAll(require('mongodb'));
 
 Cinema.collection.drop();
 

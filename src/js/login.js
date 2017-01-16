@@ -6,7 +6,7 @@ Login.init = function(){
   $('.register').on('click', this.register.bind(this));
   $('.login').on('click', this.login.bind(this));
   $('.logout').on('click', this.logout.bind(this));
-  this.$main.on('submit', 'form', this.handleForm);
+  $('body').on('submit', 'form', this.handleForm);
 
   if (this.getToken()) {
     this.loggedInState();
@@ -27,14 +27,61 @@ Login.loggedOutState = function(){
 
 Login.register = function(e) {
   if (e) e.preventDefault();
-  console.log('register');
+  $('.modal-content').html(`
+    <div class="modal-header">
+      <h5 class="modal-title">Register</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form method="post" action="/register">
+        <div class="form-group">
+          <input class="form-control" type="text" name="user[username]" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="email" name="user[email]" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="password" name="user[password]" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="password" name="user[passwordConfirmation]" placeholder="Password Confirmation">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="user[homePostcode]" placeholder="Home postcode">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+      </form>
+    </div>
+  `);
+
+  $('.modal').modal('show');
 };
-
-
 
 Login.login = function(e){
   if (e) e.preventDefault();
-  console.log('login');
+  $('.modal-content').html(`
+      <div class="modal-header">
+        <h5 class="modal-title">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/login">
+          <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+          </div>
+          <input class="btn btn-primary" type="submit" value="Login">
+        </form>
+      </div>
+  `);
+
+  $('.modal').modal('show');
 };
 
 Login.logout = function(e){
@@ -44,6 +91,7 @@ Login.logout = function(e){
 };
 
 Login.handleForm = function(e){
+  console.log('running');
   e.preventDefault();
 
   const url    = `${Login.apiUrl}${$(this).attr('action')}`;
