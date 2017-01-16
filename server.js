@@ -7,10 +7,14 @@ const expressJWT       = require('express-jwt');
 
 const app              = express();
 const config           = require('./config/config');
+const rp               = require('request-promise');
+const Cinema           = require('./models/cinema');
 const webRouter        = require('./config/webRoutes');
 const apiRouter        = require('./config/apiRoutes');
 
 const databaseURL = process.env.MONGOLAB_URL || config.db;
+
+mongoose.Promise = global.Promise;
 mongoose.connect(databaseURL);
 
 app.use(morgan('dev'));
@@ -18,6 +22,8 @@ app.use(express.static(`${__dirname}/public`));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded( {extended: true}));
 app.use(cors());
+
+app.get('/cinemas')
 
 app.use('/api', expressJWT({secret: config.secret})
   .unless({
