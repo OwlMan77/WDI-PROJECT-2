@@ -6,20 +6,6 @@
   }
 }
 
-.titles {
-  font-size: 20px;
-  font-weight: bolder;
-  font-family:'Old Standard TT', sans-serif;
-}
-
-.times{
-  font-weight: bold;
-}
-
-.navbar {
-  background: linear-gradient(to left, #000000 , #434343);
-  border-radius: 0;
-}
 
 ul {
   list-style: none;
@@ -31,10 +17,32 @@ nav {
   }
 }
 
+h5{
+    font-size: 30px;
+    font-family: 'Old Standard TT', sans-serif;
+}
 
+input{
+  font-family: 'Old Standard TT', sans-serif;
+}
 
 body{
   margin: 0;
+  .titles {
+    font-size: 20px;
+    font-weight: bolder;
+    font-family:'Old Standard TT', sans-serif;
+  }
+
+  .times{
+    font-weight: bold;
+  }
+
+  .navbar {
+    background: linear-gradient(to left, #000000 , #434343);
+    border-radius: 0;
+  }
+
 }
 
 #map-canvas {
