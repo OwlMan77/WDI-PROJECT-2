@@ -1,6 +1,9 @@
-.navbar-brand{
-  font-family: 'Yesteryear', sans-serif;
-  font-size: 25px;
+.navbar-light{
+  .navbar-brand{
+    font-family: 'Yesteryear', sans-serif;
+    font-size: 29px;
+    color: #e1d3c1;
+  }
 }
 
 .titles {
@@ -10,7 +13,12 @@
 }
 
 .times{
+  font-weight: bold;
+}
 
+.navbar {
+  background: linear-gradient(to left, #000000 , #434343);
+  border-radius: 0;
 }
 
 ul {
@@ -22,6 +30,8 @@ nav {
   font-family: 'Old Standard TT', sans-serif;
   }
 }
+
+
 
 body{
   margin: 0;
