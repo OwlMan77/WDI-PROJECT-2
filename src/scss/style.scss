@@ -9,11 +9,20 @@
   color: #e1d3c1;
   font-size: 22px;
 }
-.modal-content {
+.modal {
+    .modal-content {
+      background-color: #373a3c;
+    h5 {
+      color: #e1d3c1;
+      }
+    .form-control {
+      background-color: #e1d3c1;
+      }
+    }
+}
+
+.modal-backdrop {
   background-color: #373a3c;
-  h5 {
-    color: #e1d3c1;
-  }
 }
 
 img {

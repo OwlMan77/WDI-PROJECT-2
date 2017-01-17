@@ -12,7 +12,9 @@ function cinemasFind(req, res) {
   rp(`http://api.cinelist.co.uk/search/cinemas/coordinates/${req.params.lat}/${req.params.lng}`)
   .then(htmlString => {
     const json = JSON.parse(htmlString);
-    return res.status(200).json(json);
+    const cinemas = json.cinemas.filter(cinema => cinema.distance < 2 );
+    console.log(cinemas);
+    return res.status(200).json(cinemas);
   })
   .catch(err => {
     console.log(err);
@@ -20,7 +22,7 @@ function cinemasFind(req, res) {
 }
 
 function cinemasLocation(req, res) {
-  rp(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.name}&key=AIzaSyCS6aR9Ini0ffsm6TmMnX3u3GWRVTadsbI`)
+  rp(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.name}&key=AIzaSyAtozr4wrjNbn2qNN8kno2Je28pt3xYI8I`)
   .then(htmlString => {
     const json = JSON.parse(htmlString);
     return res.status(200).json(json);

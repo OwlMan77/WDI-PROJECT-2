@@ -18,25 +18,6 @@ googleMap.mapSetup = () => {
   };
 
   googleMap.map = new google.maps.Map(canvas, mapOptions);
-  // this.getCinemas();
-  // this.getCurrentLocation();
-  // this.map.center(pos);
-};
-
-googleMap.getLatLng = function(data) {
-  $.each(data.cinemas, (index, cinema) => {
-    $
-      .get(`http://localhost:3000/api/cinemas/${cinema.name}`)
-      .done(data => {
-        console.log(data.cinemas);
-        cinema.lat = data.results.geometry.location.lat;
-        cinema.lng = data.results.geometry.location.lng;
-        // add more data to cinema objects
-      });
-  });
-
-  googleMap.loopThroughCinemas(data.cinemas);
-
 };
 
 googleMap.getCurrentLocation = () => {
@@ -46,46 +27,58 @@ googleMap.getCurrentLocation = () => {
       lng: position.coords.longitude
     };
 
-    console.log('location found');
+    new google.maps.Marker({
+      position: new google.maps.LatLng(pos.lat, pos.lng),
+      map: googleMap.map,
+      icon: '/images/marker.png',
+      animation: google.maps.Animation.DROP
+    });
 
-    $
-      .get(`http://localhost:3000/api/cinemas/${pos.lat}/${pos.lng}`)
-      .done(googleMap.getLatLng);
+    googleMap.getCinemas(pos);
   });
 };
 
 
-googleMap.getCinemas = () => {
-  $.get('http://localhost:3000/cinemas').done(this.loopThroughCinemas);
+googleMap.getCinemas = function(pos) {
+  $.get(`http://localhost:3000/api/cinemas/${pos.lat}/${pos.lng}`).done(googleMap.getLatLng);
 };
 
-googleMap.loopThroughCinemas = (data) => {
-  $.each(data.cinemas, (index, cinema) => {
-    googleMap.createMarkerForCinemas(cinema);
+googleMap.getLatLng = function(data) {
+  console.log('running');
+
+  $.each(data, (index, cinema) => {
+    const name = cinema.name.split(',')[0];
+
+    if (name.indexOf('-') === -1) {
+      $
+      .get(`http://localhost:3000/api/cinemas/${name}`)
+      .done(data => {
+
+        console.log(data);
+
+        // IF STATEMENT TO SEE IF ANY ARE RETURNED
+        // IF NO DATA SHOW MESSAGE ON SCREEN SAYING NO CINEMA'S NEAR YOU
+
+        cinema.formattedAddress = data.results[0].formatted_address;
+        cinema.rating           = data.results[0].rating;
+        cinema.lat              = data.results[0].geometry.location.lat;
+        cinema.lng              = data.results[0].geometry.location.lng;
+
+        googleMap.createMarkerForCinemas(cinema);
+      });
+    }
   });
 };
 
 googleMap.createMarkerForCinemas = (cinema) => {
-  console.log(cinema.lng);
   const latLng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
     position: latLng,
-    map: this.map,
-    // icon: '/images/marker.png',
-    animation: google.maps.Animation.DROP
+    map: googleMap.map
   });
-  this.addInfoWindowForCamera(cinema, marker);
+  
+  // this.addInfoWindowForCamera(cinema, marker);
 };
-
-// googleMap.createYouMarker = function(pos){
-//   const latLng = new google.maps.LatLng(pos);
-//   const marker = new google.maps.Marker({
-//     position: latLng,
-//     // icon: '/images/marker.png',
-//     animation: google.maps.Animation.DROP
-//   });
-//   marker.setMap(googleMap.map);
-// };
 
 googleMap.addInfoWindowForCamera = (cinema, marker) => {
   google.maps.event.addListener(marker, 'click', () => {
