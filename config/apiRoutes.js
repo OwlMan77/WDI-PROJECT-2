@@ -12,4 +12,7 @@ router.route('/login')
 router.route('/cinemas/:lat/:lng')
   .get(cinemas.find);
 
+router.route('/cinemas/:name')
+  .get(cinemas.location);
+
 module.exports = router;

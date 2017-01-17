@@ -4,8 +4,8 @@ const titleCssClass = 'titles';
 const timesCssClass = 'times';
 const MapStyle      = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road","elementType":"geometry","stylers":[{"saturation":"14"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"lightness":"4"},{"color":"#a92a2a"},{"saturation":"-31"},{"gamma":"0.67"},{"weight":"1.19"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#151526"},{"lightness":17}]}];
 
-googleMap.mapSetup = function() {
-  $('.bob').on('click', this.getCurrentLocation);
+googleMap.mapSetup = () => {
+  $('.bob').on('click', googleMap.getCurrentLocation);
 
   const canvas = document.getElementById('map-canvas');
 
@@ -17,23 +17,29 @@ googleMap.mapSetup = function() {
     mapTypeControl: false
   };
 
-  this.map = new google.maps.Map(canvas, mapOptions);
+  googleMap.map = new google.maps.Map(canvas, mapOptions);
   // this.getCinemas();
   // this.getCurrentLocation();
   // this.map.center(pos);
-  // this.createYouMarker(pos);
 };
 
 googleMap.getLatLng = function(data) {
-  $.each(data.cinemas, (index, cinema) {
-    // for each cinema, make a call to google places link
-    // in the callback for this request, add the lat/lng values to the cinema objects.
+  $.each(data.cinemas, (index, cinema) => {
+    $
+      .get(`http://localhost:3000/api/cinemas/${cinema.name}`)
+      .done(data => {
+        console.log(data.cinemas);
+        cinema.lat = data.results.geometry.location.lat;
+        cinema.lng = data.results.geometry.location.lng;
+        // add more data to cinema objects
+      });
   });
 
-  
+  googleMap.loopThroughCinemas(data.cinemas);
+
 };
 
-googleMap.getCurrentLocation = function() {
+googleMap.getCurrentLocation = () => {
   navigator.geolocation.getCurrentPosition(function(position) {
     const pos = {
       lat: position.coords.latitude,
@@ -44,22 +50,22 @@ googleMap.getCurrentLocation = function() {
 
     $
       .get(`http://localhost:3000/api/cinemas/${pos.lat}/${pos.lng}`)
-      .done(data => this.getLatLng);
+      .done(googleMap.getLatLng);
   });
 };
 
 
-googleMap.getCinemas = function() {
+googleMap.getCinemas = () => {
   $.get('http://localhost:3000/cinemas').done(this.loopThroughCinemas);
 };
 
-googleMap.loopThroughCinemas = function(data) {
+googleMap.loopThroughCinemas = (data) => {
   $.each(data.cinemas, (index, cinema) => {
     googleMap.createMarkerForCinemas(cinema);
   });
 };
 
-googleMap.createMarkerForCinemas = function(cinema) {
+googleMap.createMarkerForCinemas = (cinema) => {
   console.log(cinema.lng);
   const latLng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
@@ -81,7 +87,7 @@ googleMap.createMarkerForCinemas = function(cinema) {
 //   marker.setMap(googleMap.map);
 // };
 
-googleMap.addInfoWindowForCamera = function(cinema, marker){
+googleMap.addInfoWindowForCamera = (cinema, marker) => {
   google.maps.event.addListener(marker, 'click', () => {
     let info = '';
     $.each(cinema.listings, (index) => {

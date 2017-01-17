@@ -36,29 +36,29 @@ Cinema.collection.drop();
 //   });
 // }
 
-// function findCinemas(req, res){
-//   rp(`api.cinelist.co.uk/search/cinemas/location/london`)
-//   .then(htmlString => {
-//     const cinemas = JSON.parse(htmlString);
-//     return cinemas.forEach(function(cinema) {
-//       return addCinemasToDb(req, res, cinema);
-//     });
-//   })
-//   .catch(err => {
-//     return res.status(500).json(err);
-//   });
-//
-// }
-//
-// function addCinemasToDb(res, req, cinema){
-//   console.log('I work!');
-//   const doc = new cinema({
-//     'address': cinema.name,
-//     'id': cinema.id
-//   });
-//   doc.save((err, doc)=>{
-//     return console.log(`${doc} saved!`);
-//   });
+function findCinemas(req, res){
+  rp(`api.cinelist.co.uk/search/cinemas/location/london`)
+  .then(htmlString => {
+    const cinemas = JSON.parse(htmlString);
+    return cinemas.forEach(function(cinema) {
+      return addCinemasToDb(req, res, cinema);
+    });
+  })
+  .catch(err => {
+    return res.status(500).json(err);
+  });
+
+}
+
+function addCinemasToDb(res, req, cinema){
+  console.log('I work!');
+  const doc = new cinema({
+    'address': cinema.name,
+    'id': cinema.id
+  });
+  doc.save((err, doc)=>{
+    return console.log(`${doc} saved!`);
+  });
 // }
 // id: {type: String},
 // name: {type: String},

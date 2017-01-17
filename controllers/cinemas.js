@@ -19,7 +19,19 @@ function cinemasFind(req, res) {
   });
 }
 
+function cinemasLocation(req, res) {
+  rp(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.name}&key=AIzaSyCS6aR9Ini0ffsm6TmMnX3u3GWRVTadsbI`)
+  .then(htmlString => {
+    const json = JSON.parse(htmlString);
+    return res.status(200).json(json);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
 module.exports = {
   index: cinemasIndex,
-  find: cinemasFind
+  find: cinemasFind,
+  location: cinemasLocation
 };
