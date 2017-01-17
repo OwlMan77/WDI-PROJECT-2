@@ -30,7 +30,6 @@ googleMap.getCurrentLocation = () => {
     new google.maps.Marker({
       position: new google.maps.LatLng(pos.lat, pos.lng),
       map: googleMap.map,
-      icon: '/images/marker.png',
       animation: google.maps.Animation.DROP
     });
 
@@ -54,8 +53,7 @@ googleMap.getLatLng = function(data) {
       .get(`http://localhost:3000/api/cinemas/${name}`)
       .done(data => {
 
-        console.log(data);
-
+        if (!data) alert('No cinemas nearby, see ya later you dirty animal!');
         // IF STATEMENT TO SEE IF ANY ARE RETURNED
         // IF NO DATA SHOW MESSAGE ON SCREEN SAYING NO CINEMA'S NEAR YOU
 
@@ -70,29 +68,44 @@ googleMap.getLatLng = function(data) {
   });
 };
 
+
 googleMap.createMarkerForCinemas = (cinema) => {
   const latLng = new google.maps.LatLng(cinema.lat, cinema.lng);
   const marker = new google.maps.Marker({
     position: latLng,
-    map: googleMap.map
+    map: googleMap.map,
+    icon: '/images/marker.png'
   });
-  
-  // this.addInfoWindowForCamera(cinema, marker);
+
+  // googleMap.addInfoWindowForCamera(cinema, marker);
 };
+
 
 googleMap.addInfoWindowForCamera = (cinema, marker) => {
   google.maps.event.addListener(marker, 'click', () => {
-    let info = '';
-    $.each(cinema.listings, (index) => {
-      const timeInfo = cinema.listings[index].times.join(', ' );
-      info = info +`<li class = ${titleCssClass}>${cinema.listings[index].title}:</li><li class = ${timesCssClass}>${timeInfo}</li>`;
-    });
-    if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
-    this.infoWindow = new google.maps.InfoWindow({
-      content: `<h3>${cinema.address}</h3> <ul>${info}</ul>`
-    });
-    this.infoWindow.open(this.map, marker);
+    console.log('clicked');
+    googleMap.getListings(cinema);
   });
+};
+googleMap.getListings = function(cinema, marker) {
+  console.log('listings');
+  $.get(`https://api.cinelist.co.uk/get/times/cinema/${cinema.id}`).done(data => googleMap.getTitlesAndTimes(data, cinema, marker));
+  // $.get(`http://localhost:3000/api/cinemas/listings/${cinema.id}`).done(data => console.log(data));
+};
+
+googleMap.getTitlesAndTimes = function(data, cinema, marker) {
+  let info = '';
+  $.each(data.listings, (index, data) => {
+    const timeInfo = data.listings[index].times.join(', ' );
+    info = info +`<li class = ${titleCssClass}>${data.listings[index].title}:</li><li class = ${timesCssClass}>${timeInfo}</li>`;
+  });
+
+  if (typeof this.infoWindow !== 'undefined') this.infoWindow.close();
+  this.infoWindow = new google.maps.InfoWindow({
+    content: `<h3>${cinema.formattedAddress}</h3><ul>${info}</ul>`
+  });
+  this.infoWindow.open(this.map, marker);
+  console.log(data);
 };
 
 $(googleMap.mapSetup.bind(googleMap));

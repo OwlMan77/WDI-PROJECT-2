@@ -13,7 +13,6 @@ function cinemasFind(req, res) {
   .then(htmlString => {
     const json = JSON.parse(htmlString);
     const cinemas = json.cinemas.filter(cinema => cinema.distance < 2 );
-    console.log(cinemas);
     return res.status(200).json(cinemas);
   })
   .catch(err => {
@@ -22,7 +21,19 @@ function cinemasFind(req, res) {
 }
 
 function cinemasLocation(req, res) {
-  rp(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.name}&key=AIzaSyAtozr4wrjNbn2qNN8kno2Je28pt3xYI8I`)
+  rp(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.params.name}&key=AIzaSyABATfVy66u30SKbWayzK3P-aLmkTYnPt0`)
+  .then(htmlString => {
+    const json = JSON.parse(htmlString);
+    return res.status(200).json(json);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+function cinemasListing(req, res) {
+  console.log('running listings');
+  rp(`https://api.cinelist.co.uk/get/times/cinema/${req.params.id}`)
   .then(htmlString => {
     const json = JSON.parse(htmlString);
     return res.status(200).json(json);
@@ -35,5 +46,6 @@ function cinemasLocation(req, res) {
 module.exports = {
   index: cinemasIndex,
   find: cinemasFind,
-  location: cinemasLocation
+  location: cinemasLocation,
+  listing: cinemasListing
 };
