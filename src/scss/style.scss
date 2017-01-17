@@ -5,6 +5,20 @@
     color: #e1d3c1;
   }
 }
+.navbar-light .navbar-nav .nav-link{
+  color: #e1d3c1;
+  font-size: 22px;
+}
+.modal-content {
+  background-color: #373a3c;
+  h5 {
+    color: #e1d3c1;
+  }
+}
+
+img {
+  display: inline;
+}
 
 ul {
   list-style: none;
@@ -16,10 +30,6 @@ nav {
   }
 }
 
-.navbar-light .navbar-nav .nav-link{
-  color: #e1d3c1;
-  font-size: 22px;
-}
 
 h5{
     font-size: 30px;
