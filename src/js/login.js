@@ -1,5 +1,6 @@
 const Login  = Login || {};
 const google = google;
+const mapStyle = [{"featureType":"all","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative.country","elementType":"labels.text.fill","stylers":[{"color":"#e5c163"}]},{"featureType":"administrative.locality","elementType":"labels.text.fill","stylers":[{"color":"#c4c4c4"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text.fill","stylers":[{"color":"#e5c163"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21},{"visibility":"on"}]},{"featureType":"poi.business","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#f9c1c3"},{"lightness":"0"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#e5c163"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#575757"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.text.stroke","stylers":[{"color":"#2c2c2c"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#999999"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}];
 
 Login.init = function(){
   this.apiUrl = 'http://localhost:3000/api';
@@ -195,7 +196,7 @@ Login.mapSetup = () => {
   const mapOptions = {
     zoom: 13,
     center: new google.maps.LatLng(51.503640, -0.1276250),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    styles: mapStyle
   };
 
   Login.map = new google.maps.Map(canvas, mapOptions);
@@ -211,7 +212,7 @@ Login.getCurrentLocation = () => {
     new google.maps.Marker({
       position: new google.maps.LatLng(pos.lat, pos.lng),
       map: Login.map,
-      icon: '/images/marker.png',
+      icon: '/images/jmSunglasses.png',
       animation: google.maps.Animation.DROP
     });
 
@@ -228,8 +229,8 @@ Login.createMarkersForLocations = (locations) => {
     const latLng = new google.maps.LatLng(location.latitudeE7/10000000, location.longitudeE7/10000000);
     new google.maps.Marker({
       position: latLng,
-      map: Login.map
-      // icon: '/images/marker.png'
+      map: Login.map,
+      icon: '/images/marker.png'
     });
   });
 };
