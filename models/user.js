@@ -25,7 +25,7 @@ userSchema
   .path('email')
   .validate(validateEmail);
 
-userSchema.method.validatePasswordHash = validatePassword;
+userSchema.methods.validatePassword = validatePassword;
 
 userSchema.set('toJSON', {
   transform: function(doc, ret) {
