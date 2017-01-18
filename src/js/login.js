@@ -1,4 +1,4 @@
-const Login = Login || {};
+const Login  = Login || {};
 const google = google;
 
 Login.init = function(){
@@ -211,6 +211,7 @@ Login.getCurrentLocation = () => {
     new google.maps.Marker({
       position: new google.maps.LatLng(pos.lat, pos.lng),
       map: Login.map,
+      icon: '/images/marker.png',
       animation: google.maps.Animation.DROP
     });
 

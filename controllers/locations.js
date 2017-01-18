@@ -1,5 +1,6 @@
 const Location = require('../models/location');
 const path     = require('path');
+const Promise  = require('bluebird');
 
 function locationsCreate(req, res) {
   if (!req.file) return res.status(500).json({ message: 'No file.' });
