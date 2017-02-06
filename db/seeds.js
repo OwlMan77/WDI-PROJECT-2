@@ -1,9 +1,10 @@
 const jmLocationData = require('../data/LocationHistory');
 const Location       = require('../models/location');
+const config         = require('../config/config');
 const Promise        = require('bluebird');
 const mongoose       = require('mongoose');
 mongoose.Promise     = Promise;
-const databaseURL    = 'mongodb://localhost:27017/cinemas';
+const databaseURL    = config.db;
 mongoose.connect(databaseURL);
 
 Location.collection.drop();
