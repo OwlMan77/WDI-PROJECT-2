@@ -222,7 +222,8 @@ Login.getCurrentLocation = () => {
 };
 
 Login.getLocations = function() {
-  $.get(`apiUrl/locations`).done(Login.createMarkersForLocations);
+  console.log(apiUrl);
+  $.get(`api/locations`).done(Login.createMarkersForLocations);
 };
 
 Login.createMarkersForLocations = (locations) => {
