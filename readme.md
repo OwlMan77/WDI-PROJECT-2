@@ -18,11 +18,17 @@ Uncheck all the data selections, choose **Locations History** make sure it is in
 
 Upload your data and see where you have been on the map.
 
+###Process
+
+First thing I did was  
+
 ###Challenges 
 
 Originally, I was making a cinema listings map that would be able to show the nearest cinema with film showings and reviews of those films. 
 
 I was using the [Cinelist API](`http://www.cinelist.co.uk/`) which scraped data from FindAnyFilm.com and google places API to get the geolocations cinema's coordinates that would be represented on a google map. The idea was that could click on those points to get the cinema listings and times. I would then implement the OMDb API get reviews and Movie Poster to appear when you click on the listing.
+
+During that time I learned the joys of API call limits, 
 
 On the final day of coding (The day before presentation), the cinelist API had lost it's security certificate making me unable to to retrieve any data.
 
