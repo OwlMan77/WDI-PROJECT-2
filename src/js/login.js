@@ -95,7 +95,7 @@ Login.addLocations = function(e) {
   if (e) e.preventDefault();
   $('.modal-content').html(`
     <div class="modal-header">
-      <h5 class="modal-title">Register</h5>
+      <h5 class="modal-title">Add Locations</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
