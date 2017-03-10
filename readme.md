@@ -64,3 +64,15 @@ For both iterations, I had trouble properly adding models properly. However I wa
 * Different icons depending on the method of travel 
 * Further styling have a better theme than what I have currently 
 * Look into Heat maps for when there is a lot of points in one area. 
+
+###Techology used
+
+####Node
+* Mongoose
+* Express
+* JWT
+* Bcrypt
+
+
+#### CSS
+* Bootstrap 
