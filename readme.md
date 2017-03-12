@@ -5,6 +5,10 @@
 
 ## Find JM
 
+### Concept 
+
+The purpose of this project is show where I have been in the UK and allow users to add their own data on the maps as well.
+
 ### How to use
 
 ![](https://lh3.googleusercontent.com/alXtJ4FuKNxIYy8RtfuhQBG2cKh9zIwYE-ixZsW_CBZntCya38uRgZiYdFLz9BVuHFZdrEhU0aIQZbTU_zjg8JnoCEwWSdFj5pcAokE8w_TncWD866i-MvQKCPE7hiUwpVVNiA213XTMTp7SOSakSmxyN8Wo0tmDrtcD_CflhubRse37yfwlF6-1qxEMYWfArDawGISCgZ2En5mSEjFNekrI0HbYwyO0BV6lII5w752o4-rUiTb2wMj-TFnN8gUckrf_nKBE01tkqAXUq6js5w8COd3vu7mR6uFYc2lLJXxSRSuJe2gRUCw6igoMqwKELDsqbEpJgE2cInmqBvPX0-ABzbYX6l2eesbQO2kLdZ9sY1L-hPLOHoUS_CoABhb5Ev0zPwOvbu-fVQlRzaqUOIXuedUqy3vSRL6Iveykte7u9i_E6UzrTGMZLI5Ct5P4GvEq7VKIT5nF0zJ2pgtfQe3wmngSa7Ea_AgUrQ4k7PpqZupujeWO1weLyH8ynxVZKRccPD_aHqh7TUVrG_S3CRcR89vpKW3HN4GNq7UIVKP6sFY1acZjpEDT5rq__79Fo3sxbZEt=w1281-h733)
@@ -13,7 +17,7 @@ Register using the toolbar and model provided or Login if previously registered 
 
 If you wish to upload your own data simply make sure you are logged in and click the 'Add locations data' on the toolbar. 
 
-To mark locations on the map you will need to upload is the Takeout data from google, this can be done if you have a google account and use the link below!
+To mark locations on the map you will need to upload Takeout data from google, this can be done if you have a google account and use the link below:
 
 [Takeout](https://takeout.google.com/settings/takeout)
 
@@ -34,7 +38,7 @@ Implementing Google Maps was relavitely simple as all then needed to be done was
 
 From that point on the first thing I did when I decided on what to do was create a model called `location` with an api route and a controller. This would accept all the data from the takeout JSON data and save it to the database.
 
-I then implemented Multer(a file upload module) with a upload directory to act as storage, I then implemented a promise in the locations controllerto create a location for each location in a JSON file uploaded.
+I then implemented Multer(a file upload module) with a upload directory to act as storage, I then implemented a promise in the locations controller to create a location for each location in a JSON file uploaded.
 
 ###Challenges 
 
@@ -42,23 +46,25 @@ Originally, I was making a cinema listings map that would be able to show the ne
 
 I was using the [Cinelist API](`http://www.cinelist.co.uk/`) which scraped data from FindAnyFilm.com and google places API to get the geolocations cinema's coordinates that would be represented on a google map. The idea was that could click on those points to get the cinema listings and times. I would then implement the OMDb API get reviews and Movie Poster to appear when you click on the listing.
 
-During that time I learned the joys of API call limits (Especially with the google places API) and the diffculity of making API call based on the results of previous API calls. 
+During that time I learned the joys of API call limits (especially with the google places API) and the diffculity of making API call based on the results of previous API calls. 
 
-On the final day of coding (The day before presentation), the cinelist API had lost it's security certificate making me unable to to retrieve any data.
+On the final day of coding (the day before presentation), the cinelist API had lost it's security certificate making me unable to to retrieve any data.
 
 ![](https://media.giphy.com/media/ijFI5bqztBw9a/giphy.gif)
 
-Two calls were made from the cinelist API (to get the Cinema info and the listings for each Cinema), leaving the project almost completely unsalvagable. So unfortunately I had to move towards making a less complicated project within a much shorter time period.
+Two calls were made from the cinelist API (to get the Cinema info and the listings for each Cinema) ...excellent. With that in consideration and  the shorter time span, I moved to a different project idea with no external API calls.
 
 Fun times!
 
 Challenges I had in the final itertation of this project was deciding how I would get the data to plot, realising I would need to use promises and understanding how to use promises to plot the data on the map. However, I was able successfully implement promise to save JSON data using the Bluebird library.  
 
-For both iterations, I had trouble properly adding models properly. However I was successful able to do so once I figured that I could change the content of the same model for multiple purposes.
+For both iterations, I had trouble properly adding models properly. However I was successful able to do so once I figured that I could change the content of the same model for multiple purposes. 
 
-### What I would do differently
-* Made sure to use a larger company's API or scape the data myself using cheerio.js, if a stable source is not available. I had trouble finding a reliable cinema API that had mulitple    
-* Made sure the project was more modular in the use of APIs and have not it be dependant on one API for a large amount of it's data rather than using two API calls.  
+### What I would have done differently
+I learnt a lot from this project next time I would:
+
+* Make sure to use a larger company's API or scape the data myself using cheerio.js, if a stable source is not available. I had trouble finding a reliable cinema API that had mulitple    
+* Make sure the project has more modular in the use of APIs and have not it be dependant on one API for a large amount of it's data rather than using two API calls.  
 
 ###Future changes 
 
