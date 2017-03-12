@@ -3,7 +3,6 @@
 <br>
 #WDI-24-Project 2
 
-
 ## Find JM
 
 ### How to use
